@@ -77,7 +77,7 @@ int main(){
                 cin >> grade;
                 cout << endl;
 
-                cout << "Enter number of credits you got for this course: ";
+                cout << "Enter # of credits you got for this course: ";
                 cin >> credits;
                 cout << endl;
 

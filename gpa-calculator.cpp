@@ -1,17 +1,20 @@
 #include <iostream>
 #include <map>
+#include <string>
 using namespace std;
 
 void showMenu(){
+    cout << endl;
     cout << "*******MENU*******"<< endl;
     cout << "1. Add New Class"<< endl;
     cout << "2. Calculate GPA"<< endl;
     cout << "3. Exit"<< endl;
     cout << "******************"<< endl;
+    cout << endl;
 }
 
 double calculateGPA(int classes, double score){
-    return classes / score;
+    return score / classes;
 }
 
 int main(){
@@ -51,32 +54,33 @@ int main(){
     gradeToScore["FF"] = 1.0;
     
     int option;
-    double totalScore;
-    double totalCredits;
-    int totalClasses;
+    int totalClasses = 0;
+    double totalScore = 0.0;
+    double totalCredits = 0.0;
 
     do{
         showMenu();
-        cout << endl;
         cout << "Choose option: ";
         cin >> option;
+        cin.ignore(1, '\n');
+        cout << endl;
 
         switch(option){
             case 1: 
             {
-                string course;
-                string grade;
+                std::string course;
+                std::string grade;
                 double credits;
 
-                cout << endl;
                 cout << "Enter class name: ";
-                cin >> course;
+                std::getline(std::cin, course);
+                cout << course;
                 cout << endl;
-
                 cout << "Enter grade you got in this course [a+, a, a-, b+, b, b-, c+, c, c-, d+, d, d-, f+, f, f-, ff)]: ";
-                cin >> grade;
+                cout << grade;
+                std::getline(std::cin, grade);
+                cout << grade;
                 cout << endl;
-
                 cout << "Enter # of credits you got for this course: ";
                 cin >> credits;
                 cout << endl;
@@ -87,21 +91,22 @@ int main(){
                     totalClasses++;
                 };
                 if (isdigit(credits)) totalCredits += credits;
-
                 break;
             }
             case 2:{
+                cout << endl;
                 if(classToGrade.size() == 0){
                     cout << "you have not added any classes yet" << endl;
-                    cout << endl;
                 }else{
-                    cout << "Your gpa is" << calculateGPA(totalClasses, totalScore) << endl;
+                    double gpa = calculateGPA(totalClasses, totalScore);
+                    cout << "Your current gpa is " << gpa << endl;
                 }
-
+                cout << endl;
                 break;
             }
         }
     }while(option != 3);
+
     return 0;
 }   
 
